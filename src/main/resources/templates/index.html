@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{general/fragmentos :: head}"></head>
-    <body class="d-flex flex-column min-vh-100">
-        <header th:replace="~{general/fragmentos :: header}"></header>
-        <main class="container flex-grow-1 py-5">
-            <section class="p-5 rounded-3 bg-light border">
-                <h1 class="display-5 fw-bold">Proyecto Tienda</h1>
-                <p class="lead mb-0">Aplicación web desarrollada con Spring Boot, Thymeleaf y Bootstrap.</p>
-            </section>
-        </main>
-        <footer th:replace="~{general/fragmentos :: footer}"></footer>
-    </body>
+<head th:replace="~{general/fragmentos :: head}"></head>
+<body class="d-flex flex-column min-vh-100">
+<header th:replace="~{general/fragmentos :: header}"></header>
+<main class="container flex-grow-1 py-4">
+    <section class="mb-4">
+        <h1 class="display-6 fw-bold">Catálogo de productos</h1>
+        <p class="text-secondary">Seleccione una categoría para filtrar los productos disponibles.</p>
+    </section>
+    <section th:replace="~{consultas/fragmentos :: tabs}"></section>
+    <section th:replace="~{consultas/fragmentos :: tarjetas}"></section>
+</main>
+<footer th:replace="~{general/fragmentos :: footer}"></footer>
+</body>
 </html>
