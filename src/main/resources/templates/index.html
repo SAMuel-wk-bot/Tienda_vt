@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{general/fragmentos :: head}"></head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         <header th:replace="~{general/fragmentos :: header}"></header>
-
-       <section th:replace="~{consultas/fragmentos :: tabs}"/>
-       <section th:replace="~{consultas/fragmentos :: tarjetas}"/>
-
+        <main class="container flex-grow-1 py-5">
+            <section class="p-5 rounded-3 bg-light border">
+                <h1 class="display-5 fw-bold">Proyecto Tienda</h1>
+                <p class="lead mb-0">Aplicación web desarrollada con Spring Boot, Thymeleaf y Bootstrap.</p>
+            </section>
+        </main>
         <footer th:replace="~{general/fragmentos :: footer}"></footer>
     </body>
 </html>
