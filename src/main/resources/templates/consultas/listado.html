@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{general/fragmentos :: head}"></head>
+<body class="d-flex flex-column min-vh-100">
+<header th:replace="~{general/fragmentos :: header}"></header>
+<main class="container flex-grow-1 py-4">
+    <h1 class="display-6 fw-bold mb-4">Consultas de productos</h1>
+    <section th:replace="~{consultas/fragmentos :: consultas}"></section>
+</main>
+<footer th:replace="~{general/fragmentos :: footer}"></footer>
+</body>
+</html>
