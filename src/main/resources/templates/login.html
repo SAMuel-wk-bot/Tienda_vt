@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}"></head>
+
+    <body class="bg-light">
+
+        <main class="container py-5">
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="card shadow">
+
+                        <div class="card-header bg-dark text-white text-center">
+
+                            <h1 class="h4 mb-0">
+                                Iniciar sesión
+                            </h1>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="alert alert-danger"
+                                 th:if="${param.error}">
+                                Usuario o contraseña incorrectos.
+                            </div>
+
+                            <div class="alert alert-success"
+                                 th:if="${param.logout}">
+                                La sesión se cerró correctamente.
+                            </div>
+
+                            <form th:action="@{/login}"
+                                  method="post">
+
+                                <div class="mb-3">
+
+                                    <label for="username"
+                                           class="form-label">
+                                        Usuario
+                                    </label>
+
+                                    <input type="text"
+                                           id="username"
+                                           name="username"
+                                           class="form-control"
+                                           required="required"
+                                           autofocus="autofocus"/>
+
+                                </div>
+
+                                <div class="mb-3">
+
+                                    <label for="password"
+                                           class="form-label">
+                                        Contraseña
+                                    </label>
+
+                                    <input type="password"
+                                           id="password"
+                                           name="password"
+                                           class="form-control"
+                                           required="required"/>
+
+                                </div>
+
+                                <button type="submit"
+                                        class="btn btn-primary w-100">
+                                    Ingresar
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                        <div class="card-footer text-center">
+
+                            <a th:href="@{/}">
+                                Regresar al catálogo
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </body>
+
+</html>ss

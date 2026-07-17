@@ -1,53 +1,222 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:fragment="head">
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Tienda</title>
-        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
-        <link th:href="@{/webjars/font-awesome/css/all.min.css}" rel="stylesheet"/>
-        <link th:href="@{/css/estilos.css}" rel="stylesheet"/>
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-        <script th:src="@{/js/rutinas.js}" defer="defer"></script>
-    </head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0"/>
+
+    <title>Tienda</title>
+
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet"
+          th:href="@{/webjars/font-awesome/7.0.1/css/all.min.css}"/>
+
+    <link rel="stylesheet"
+          th:href="@{/css/estilos.css}"/>
+
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+
+    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}">
+    </script>
+
+    <script th:src="@{/js/rutinas.js}"
+            defer="defer">
+    </script>
+
+</head>
     <body>
+
         <header th:fragment="header">
+
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
                 <div class="container">
-                    <a class="navbar-brand" th:href="@{/}"><i class="fa-solid fa-store"></i> Tienda</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#menuPrincipal" aria-controls="menuPrincipal"
-                            aria-expanded="false" aria-label="Mostrar navegación">
+
+                    <a class="navbar-brand"
+                       th:href="@{/}">
+
+                        <i class="fa-solid fa-store"></i>
+                        Tienda
+
+                    </a>
+
+                    <button class="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#menuPrincipal"
+                            aria-controls="menuPrincipal"
+                            aria-expanded="false"
+                            aria-label="Mostrar navegación">
+
                         <span class="navbar-toggler-icon"></span>
+
                     </button>
-                    <div class="collapse navbar-collapse" id="menuPrincipal">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" th:href="@{/}">Inicio</a></li>
-                            <li class="nav-item"><a class="nav-link" th:href="@{/categoria/listado}">Categorías</a></li>
-                            <li class="nav-item"><a class="nav-link" th:href="@{/producto/listado}">Productos</a></li>
-                            <li class="nav-item"><a class="nav-link" th:href="@{/consultas/listado}">Consultas</a></li>
+
+                    <div class="collapse navbar-collapse"
+                         id="menuPrincipal">
+
+                        <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   th:href="@{/}">
+                                    Inicio
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item"
+                                sec:authorize="hasAnyRole('VENDEDOR','ADMIN')">
+
+                                <a class="nav-link"
+                                   th:href="@{/categoria/listado}">
+                                    Categorías
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item"
+                                sec:authorize="hasAnyRole('VENDEDOR','ADMIN')">
+
+                                <a class="nav-link"
+                                   th:href="@{/producto/listado}">
+                                    Productos
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item"
+                                sec:authorize="hasAnyRole('VENDEDOR','ADMIN')">
+
+                                <a class="nav-link"
+                                   th:href="@{/consultas/listado}">
+                                    Consultas
+                                </a>
+
+                            </li>
+
+                            <!-- Se muestra cuando no hay una sesión iniciada -->
+
+                            <li class="nav-item"
+                                sec:authorize="isAnonymous()">
+
+                                <a class="nav-link"
+                                   th:href="@{/login}">
+
+                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                    Iniciar sesión
+
+                                </a>
+
+                            </li>
+
+                            <!-- Se muestra cuando el usuario inició sesión -->
+
+                            <li class="nav-item"
+                                sec:authorize="isAuthenticated()">
+
+                                <span class="navbar-text text-white me-lg-3">
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                    <span sec:authentication="name"></span>
+
+                                </span>
+
+                            </li>
+
+                            <li class="nav-item"
+                                sec:authorize="isAuthenticated()">
+
+                                <form th:action="@{/logout}"
+                                      method="post"
+                                      class="d-inline">
+
+                                    <button type="submit"
+                                            class="btn btn-link nav-link border-0">
+
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                        Cerrar sesión
+
+                                    </button>
+
+                                </form>
+
+                            </li>
+
                         </ul>
+
                     </div>
+
                 </div>
+
             </nav>
+
         </header>
 
         <section th:fragment="mostrarToast">
+
             <div class="toast-container position-fixed top-0 end-0 p-3">
-                <div th:if="${error}" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header text-bg-danger"><strong class="me-auto">Error</strong></div>
-                    <div class="toast-body" th:text="${error}"></div>
+
+                <div th:if="${error}"
+                     class="toast show"
+                     role="alert"
+                     aria-live="assertive"
+                     aria-atomic="true">
+
+                    <div class="toast-header text-bg-danger">
+
+                        <strong class="me-auto">
+                            Error
+                        </strong>
+
+                    </div>
+
+                    <div class="toast-body"
+                         th:text="${error}">
+                    </div>
+
                 </div>
-                <div th:if="${todoOk}" class="toast show" role="status" aria-live="polite" aria-atomic="true">
-                    <div class="toast-header text-bg-success"><strong class="me-auto">Atención</strong></div>
-                    <div class="toast-body" th:text="${todoOk}"></div>
+
+                <div th:if="${todoOk}"
+                     class="toast show"
+                     role="status"
+                     aria-live="polite"
+                     aria-atomic="true">
+
+                    <div class="toast-header text-bg-success">
+
+                        <strong class="me-auto">
+                            Atención
+                        </strong>
+
+                    </div>
+
+                    <div class="toast-body"
+                         th:text="${todoOk}">
+                    </div>
+
                 </div>
+
             </div>
+
         </section>
 
-        <footer th:fragment="footer" class="bg-dark text-white text-center py-3 mt-auto">
-            <div class="container">Proyecto Tienda - Universidad Fidélitas</div>
+        <footer th:fragment="footer"
+                class="bg-dark text-white text-center py-3 mt-auto">
+
+            <div class="container">
+                Proyecto Tienda - Universidad Fidélitas
+            </div>
+
         </footer>
+
     </body>
+
 </html>
