@@ -69,4 +69,24 @@ public class ProductoService {
         }
         productoRepository.deleteById(idProducto);
     }
+    @Transactional(readOnly = true)
+public List<Producto> consultaAmpliada(
+        String descripcion,
+        Integer idCategoria,
+        BigDecimal precioMin,
+        BigDecimal precioMax) {
+
+    String textoBusqueda = descripcion;
+
+    if (textoBusqueda != null && textoBusqueda.isBlank()) {
+        textoBusqueda = null;
+    }
+
+    return productoRepository.consultaAmpliada(
+            textoBusqueda,
+            idCategoria,
+            precioMin,
+            precioMax
+    );
+}
 }
